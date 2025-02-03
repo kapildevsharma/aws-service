@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.kapil</groupId>
+  <artifactId>spring-boot-lambda</artifactId>
+  <name>spring-boot-sqs</name>
+  <version>0.1-SNAPSHOT</version>
+  <description>Spring Boot application with AWS Lambda</description>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <artifactSet>
+            <excludes>
+              <exclude>com.amazonaws:aws-java-sdk*</exclude>
+            </excludes>
+          </artifactSet>
+          <transformers>
+            <transformer>
+              <mainClass>com.kapil.MyLambdaFunction</mainClass>
+            </transformer>
+          </transformers>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <properties>
+    <java.version>11</java.version>
+  </properties>
+</project>
